@@ -17,7 +17,7 @@ ScreenManager:
 
         MDProgressBar:
             id: progress_bar
-            value: 50
+            value: 90
             max: 100
             size_hint_y: None
             height: "6dp"
@@ -28,10 +28,92 @@ ScreenManager:
 
 <HomeScreen>:
     name: "home"
-    BoxLayout:
-        orientation: 'vertical'
-        Label:
-            text: 'Bem-vindo ao ecrã inicial'
-        Button:
-            text: 'Ir para Configurações'
 
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "20dp"
+        spacing: "20dp"
+
+        # -------------------------------
+        # 1 DIV EM CIMA (como hero section)
+        # -------------------------------
+        MDBoxLayout:
+            size_hint_y: None
+            height: "200dp"
+            md_bg_color: 0.2, 0.5, 0.9, 1
+            radius: [20, 20, 20, 20]
+            Label:
+                color: 1, 1, 1, 1
+                font_size: "24sp"
+                text: "Qual a Capital de Angola?"
+            
+            MDFillRoundFlatButton:
+                text: "Div principal"
+
+        # -------------------------------
+        # 4 DIVS (2x2)
+        # -------------------------------
+        MDGridLayout:
+            cols: 2
+            spacing: "10dp"
+            padding: "10dp"
+            height: "100dp"
+
+            MDCard:
+                id: card1
+                radius: 10
+                md_bg_color: 0.9, 0.9, 0.9, 1
+                on_release: app.select_card("card1")
+                Label:
+                    color: 0, 0, 0, 1
+                    text: "Luanda"
+
+            MDCard:
+                id: card2
+                radius: 10
+                md_bg_color: 0.9, 0.9, 0.9, 1
+                on_release: app.select_card("card2")
+                Label:
+                    color: 0, 0, 0, 1
+                    text: "Malanje"
+
+            MDCard:
+                id: card3
+                radius: 10
+                md_bg_color: 0.9, 0.9, 0.9, 1
+                on_release: app.select_card("card3")
+                Label:
+                    color: 0, 0, 0, 1
+                    text: "Cabinda"
+
+            MDCard:
+                id: card4
+                radius: 10
+                md_bg_color: 0.9, 0.9, 0.9, 1
+                on_release: app.select_card("card4")
+                Label:
+                    color: 0, 0, 0, 1
+                    text: "Huambo"
+
+            MDCard:
+                id: card5
+                radius: 10
+                md_bg_color: 0.9, 0.9, 0.9, 1
+                on_release: app.select_card("card5")
+                Label:
+                    color: 0, 0, 0, 1
+                    text: "Benguela"
+            MDCard:
+                id: card6
+                radius: 10
+                md_bg_color: 0.9, 0.9, 0.9, 1
+                on_release: app.select_card("card6")
+                Label:
+                    color: 0, 0, 0, 1
+                    text: "Muxico"
+
+
+        # -------------------------------
+        # 5 DIVS EM LINHA (como 5 colunas)
+        # -------------------------------
+        
