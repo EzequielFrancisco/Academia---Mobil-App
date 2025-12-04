@@ -1,0 +1,37 @@
+ScreenManager:
+    SplashScreen:
+    HomeScreen:
+
+<SplashScreen>:
+    name: "splash"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "40dp"
+        spacing: "20dp"
+
+        MDLabel:
+            text: "A carregar..."
+            halign: "center"
+            font_style: "H4"
+
+        MDProgressBar:
+            id: progress_bar
+            value: 50
+            max: 100
+            size_hint_y: None
+            height: "6dp"
+
+        MDLabel:
+            text: "Por favor aguarde"
+            halign: "center"
+
+<HomeScreen>:
+    name: "home"
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Bem-vindo ao ecrã inicial'
+        Button:
+            text: 'Ir para Configurações'
+
