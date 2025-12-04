@@ -1,0 +1,34 @@
+# Ambiente virtual
+venv/
+ENV/
+env/
+.venv/
+
+# Ficheiros compilados Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Buildozer
+.buildozer/
+bin/
+*.apk
+*.aab
+*.keystore
+
+# Kivy / KivyMD
+*.log
+*.db
+*.sqlite3
+
+# Configurações do sistema
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Distribuição
+dist/
+build/
