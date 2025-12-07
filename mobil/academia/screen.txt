@@ -37,45 +37,52 @@ ScreenManager:
         id: container
         orientation: "vertical"
         
-       # MDCarousel:
-        #    id: carousel
-         #   size_hint_y: None
-          #  size_hint_x:0.9
-           # height: "220dp"
-            #padding: [1, 10, 1, 0] # left, top, right, bottom
-            #loop: True
-        MDScrollView:
-            height: "100dp"
-            do_scroll_x: True
-            do_scroll_y: True
-            padding: [0, 10, 0, 10] # left, top, right, bottom
+        MDCarousel:
+            id: carousel
+            size_hint_y: None
+            size_hint_x:0.9
+            height: "220dp"
+            padding: [1, 10, 1, 0] # left, top, right, bottom
+            loop: True
             
+         
+        MDScrollView:
+            
+            height: "150dp" 
             MDBoxLayout:
-                orientation: "horizontal"
-                spacing: "5dp"
-                padding: "10dp"
-                size_hint: 1, 1
-                width: "1000dp"
-                pos_hint: {"center_x":0.5}
-                width: self.minimum_width
-                
-                MDBoxLayout:
-                    orientation: "vertical"
-                    pos_hint: {"center_x":0.5}
-                    size_hint: 1, None
-                    height: "200dp"
-                    width: "600dp"
-                    md_bg_color: 0.2, 0.5, 0.9, 1
-                    radius: [20, 20, 20, 20]
-                    Label:
-                        color: 1, 1, 1, 1
-                        font_size: "24sp"
-                        text: "Qual a Capital de Angola?"
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+
+                MDList:
+                    ThreeLineAvatarListItem:
+                        text: "Three-line item with avatar"
+                        secondary_text: "Secondary text here"
+                        tertiary_text: "fit more text than usual"
+
+                        ImageLeftWidget:
+                            source: app.asset_path + "/geography_1321027.png"
+                MDList:
+                    ThreeLineAvatarListItem:
+                        text: "Three-line item with avatar"
+                        secondary_text: "Secondary text here"
+                        tertiary_text: "fit more text than usual"
+
+                        ImageLeftWidget:
+                            source: app.asset_path + "/geography_1321027.png"
+                MDList:
+                    ThreeLineAvatarListItem:
+                        text: "Three-line item with avatar"
+                        secondary_text: "Secondary text here"
+                        tertiary_text: "fit more text than usual"
+
+                        ImageLeftWidget:
+                            source: app.asset_path + "/geography_1321027.png"
                 
 
         MDScrollView:
             height: "100dp"
-            do_scroll_x: True
+            do_scroll_x: False
             do_scroll_y: True
 
             MDBoxLayout:
@@ -87,49 +94,40 @@ ScreenManager:
 
                 MDCard:
                     size_hint: None, None
-                    height: "75dp"
-                    width: "75dp"
+                    height: "100dp"
+                    width: "100dp"
                     radius: 10
                     md_bg_color: 0.9, 0.9, 0.9, 1
                     Label:
                         color: 0, 0, 0, 1
-                        text: "Historia"
+                        text: "card"
                 MDCard:
                     size_hint: None, None
-                    height: "75dp"
-                    width: "75dp"
+                    height: "100dp"
+                    width: "100dp"
                     radius: 10
                     md_bg_color: 0.9, 0.9, 0.9, 1
                     Label:
                         color: 0, 0, 0, 1
-                        text: "Ingles"
+                        text: "card"
                 MDCard:
                     size_hint: None, None
-                    height: "75dp"
-                    width: "75dp"
+                    height: "100dp"
+                    width: "100dp"
                     radius: 10
                     md_bg_color: 0.9, 0.9, 0.9, 1
                     Label:
                         color: 0, 0, 0, 1
-                        text: "Math"
+                        text: "card"
                 MDCard:
                     size_hint: None, None
-                    height: "75dp"
-                    width: "75dp"
+                    height: "100dp"
+                    width: "100dp"
                     radius: 10
                     md_bg_color: 0.9, 0.9, 0.9, 1
                     Label:
                         color: 0, 0, 0, 1
-                        text: "Fisica"
-                MDCard:
-                    size_hint: None, None
-                    height: "75dp"
-                    width: "75dp"
-                    radius: 10
-                    md_bg_color: 0.9, 0.9, 0.9, 1
-                    Label:
-                        color: 0, 0, 0, 1
-                        text: "Geografia"
+                        text: "card"
         MDBottomAppBar:
             
             MDTopAppBar:
