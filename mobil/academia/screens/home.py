@@ -9,6 +9,7 @@ class HomeScreen(Screen):
     def screen_root(self, screen):
         match screen:
             case "quiz":
+                self.manager.current = "quiz"
                 print("quiz screen")
     
     def on_enter(self, *args):
@@ -16,6 +17,10 @@ class HomeScreen(Screen):
         # if not self.ids.carousel.children:
             # self.create_carousel()
         pass
+    
+    def on_plus(self):
+        self.manager.current = "form"
+
 '''
     def create_carousel(self):
         carousel = self.ids.carousel

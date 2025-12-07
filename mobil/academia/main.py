@@ -8,6 +8,7 @@ from kivy.core.window import Window
 from screens.splash import SplashScreen
 from screens.home import HomeScreen
 from screens.quiz import QuizScreen
+from screens.form import FormScreen
 
 # sete the winow size (for desktop testing)
 Window.size = (360, 640)

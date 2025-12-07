@@ -18,3 +18,4 @@ class SplashScreen(Screen):
 
     def go_home(self, *args):
         self.manager.current = "home"
+        # self.manager.current = "quiz"

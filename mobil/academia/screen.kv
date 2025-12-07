@@ -2,6 +2,7 @@ ScreenManager:
     SplashScreen:
     HomeScreen:
     QuizScreen:
+    FormScreen:
 
 
 <SplashScreen>:
@@ -29,7 +30,7 @@ ScreenManager:
             halign: "center"
 
 
-# ---------------------quiz screen------------------------
+# ---------------------home screen------------------------
 <HomeScreen>:
     name: "home"
 
@@ -37,13 +38,6 @@ ScreenManager:
         id: container
         orientation: "vertical"
         
-       # MDCarousel:
-        #    id: carousel
-         #   size_hint_y: None
-          #  size_hint_x:0.9
-           # height: "220dp"
-            #padding: [1, 10, 1, 0] # left, top, right, bottom
-            #loop: True
         MDScrollView:
             height: "100dp"
             do_scroll_x: True
@@ -70,7 +64,7 @@ ScreenManager:
                     Label:
                         color: 1, 1, 1, 1
                         font_size: "24sp"
-                        text: "Qual a Capital de Angola?"
+                        text: "Pronto para aprender?"
                 
 
         MDScrollView:
@@ -91,6 +85,7 @@ ScreenManager:
                     width: "75dp"
                     radius: 10
                     md_bg_color: 0.9, 0.9, 0.9, 1
+                    on_release: root.screen_root('quiz')
                     Label:
                         color: 0, 0, 0, 1
                         text: "Historia"
@@ -136,10 +131,11 @@ ScreenManager:
                 title: "Academia"
                 icon: "plus"
                 type: "bottom"
+                on_action_button: root.on_plus()
                 shadow_color: 0, 0, 0, 1
                 elevation: 0
                 mode: "end"
-                left_action_items: [["menu", lambda x: x]]
+                left_action_items: [["menu", lambda x: root.on_plus()]]
 
 # ---------------------quiz screen------------------------
 <QuizScreen>:
@@ -149,76 +145,66 @@ ScreenManager:
         orientation: "vertical"
         padding: "20dp"
         spacing: "20dp"
-        
 
+        # Área da pergunta (altura fixa)
         MDBoxLayout:
             size_hint_y: None
-            height: "200dp"
+            height: dp(120)
             md_bg_color: 0.2, 0.5, 0.9, 1
             radius: [20, 20, 20, 20]
+
             Label:
                 color: 1, 1, 1, 1
-                font_size: "24sp"
+                font_size: "14sp"
                 text: "Qual a Capital de Angola?"
-            
+
             MDFillRoundFlatButton:
                 text: "Div principal"
 
-        MDGridLayout:
-            cols: 2
-            spacing: "10dp"
+        # Área das opções (cresce com o conteúdo)
+        ScrollView:
+            size_hint_y: 1   # ocupa todo o espaço restante
+            MDGridLayout:
+                id: containers_quiz_card
+                cols: 2
+                spacing: dp(10)
+                padding: dp(10)
+                size_hint_y: None
+                adaptive_height: True
+
+# ---------------------form screen------------------------
+<FormScreen>:
+    name: "form"
+    MDScreen:
+
+        MDTextField:
+            id: question
+            hint_text: "Create a question"
+            pos_hint: {"center_x": 0.5, "center_y":0.7}
+            size_hint_x: 0.7
+            size_hint_y: 0.2
+            mode: "rectangle"
+
+        MDBoxLayout:
+            id: form_screen
+            orientation: "vertical"
+            spacing: "50dp"
             padding: "10dp"
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: "5dp"
+            padding: "10dp"
+            size_hint: None, None
             height: "100dp"
-
-            MDCard:
-                id: card1
-                radius: 10
-                md_bg_color: 0.9, 0.9, 0.9, 1
-                on_release: root.select_card("card1")
-                Label:
-                    color: 0, 0, 0, 1
-                    text: "Luanda"
-
-            MDCard:
-                id: card2
-                radius: 10
-                md_bg_color: 0.9, 0.9, 0.9, 1
-                on_release: root.select_card("card2")
-                Label:
-                    color: 0, 0, 0, 1
-                    text: "Malanje"
-
-            MDCard:
-                id: card3
-                radius: 10
-                md_bg_color: 0.9, 0.9, 0.9, 1
-                on_release: root.select_card("card3")
-                Label:
-                    color: 0, 0, 0, 1
-                    text: "Cabinda"
-
-            MDCard:
-                id: card4
-                radius: 10
-                md_bg_color: 0.9, 0.9, 0.9, 1
-                on_release: root.select_card("card4")
-                Label:
-                    color: 0, 0, 0, 1
-                    text: "Huambo"
-
-            MDCard:
-                id: card5
-                radius: 10
-                md_bg_color: 0.9, 0.9, 0.9, 1
-                on_release: root.select_card("card5")
-                Label:
-                    color: 0, 0, 0, 1
-                    text: "Benguela"
-            MDCard:
-                id: card6
-                radius: 10
-                md_bg_color: 0.9, 0.9, 0.9, 1
-                on_release: root.select_card("card6")
-                Label:
-                    color: 0, 0, 0, 1
-                    text: "Muxico"
+                
+            
+            MDRaisedButton:
+                text: "Criar jogo"
+                pos_hint: {"center_x": 0.5, "center_y":0.1}
+                on_release: root.create_game()
+            
+            MDRaisedButton:
+                text: "Adicionar resposta"
+                pos_hint: {"center_x": 0.5, "center_y":0.1}
+                on_release: root.create_question(2)
