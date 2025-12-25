@@ -16,7 +16,7 @@ class QuizScreen(Screen):
         self.show_dialog()
 
     def create_game(self):
-        app = App.get_running_app()   # ← CORREÇÕES AQUI
+        app = App.get_running_app()   
         data = app.bd.get_game()
 
         print(data)

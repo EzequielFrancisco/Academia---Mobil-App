@@ -3,6 +3,7 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDFillRoundFlatButton
 from kivy.uix.label import Label
 from kivy.metrics import dp
+from kivy.clock import Clock
 
 class HomeScreen(Screen):
 
@@ -13,13 +14,18 @@ class HomeScreen(Screen):
                 print("quiz screen")
     
     def on_enter(self, *args):
-        # Só cria o carrossel a primeira vez!
-        # if not self.ids.carousel.children:
-            # self.create_carousel()
-        pass
+        # Troca de slide a cada 3 segundos
+        Clock.schedule_interval(self.next_slide, 3)
+
+    def next_slide(self, dt):
+        carousel = self.ids.carousel  # aqui self.ids, não self.root.ids
+        carousel.load_next(mode='next') 
     
     def on_plus(self):
         self.manager.current = "form"
+    
+    
+    
 
 '''
     def create_carousel(self):

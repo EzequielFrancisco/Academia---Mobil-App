@@ -35,108 +35,303 @@ ScreenManager:
     name: "home"
 
     MDBoxLayout:
-        id: container
         orientation: "vertical"
+        spacing: "0dp"
         
+        MDTopAppBar:
+            title: ""
+            md_bg_color: 0.4627, 0.2196, 0.9804, 1  # #7638FA
+            left_action_items: [["account", lambda x: app.on_profile(x)]]
+            right_action_items: [["bell", lambda x: app.on_notification(x)], ["information", lambda x: app.on_info(x)]]
+            size_hint_y: None
+            height: "56dp"
+            elevation: 0
+
         MDScrollView:
-            height: "100dp"
-            do_scroll_x: True
+            do_scroll_x: False
             do_scroll_y: True
-            padding: [0, 10, 0, 10] # left, top, right, bottom
+            bar_width: "8dp"
+            bar_color: 0.4627, 0.2196, 0.9804, 0.8
+            bar_inactive_color: 0.4627, 0.2196, 0.9804, 0.3
             
             MDBoxLayout:
-                orientation: "horizontal"
-                spacing: "5dp"
-                padding: "10dp"
-                size_hint: 1, 1
-                width: "1000dp"
-                pos_hint: {"center_x":0.5}
-                width: self.minimum_width
+                orientation: "vertical"
+                spacing: "25dp"
+                padding: ["20dp", "20dp", "20dp", "80dp"]
+                size_hint_y: None
+                height: self.minimum_height
+                size_hint_x: 1
                 
+                # Seção do Carousel (Banner)
                 MDBoxLayout:
                     orientation: "vertical"
-                    pos_hint: {"center_x":0.5}
                     size_hint: 1, None
                     height: "200dp"
-                    width: "600dp"
-                    md_bg_color: 0.2, 0.5, 0.9, 1
-                    radius: [20, 20, 20, 20]
-                    Label:
-                        color: 1, 1, 1, 1
-                        font_size: "24sp"
-                        text: "Pronto para aprender?"
-                
+                    md_bg_color: 0.4627, 0.2196, 0.9804, 1
+                    radius: [25, 25, 25, 25]
+                    padding: "10dp"
+                    
+                    Carousel:
+                        id: carousel
+                        direction: "right"
+                        loop: True
+                        size_hint: 1, 1
+                        anim_type: "out_quad"
+                        anim_duration: 0.3
+                        
+                        FitImage:
+                            source: app.asset_path + "/2329993.jpg"
+                            keep_ratio: False
+                            allow_stretch: True
+                        FitImage:
+                            source: app.asset_path + "/7528944.jpg"
+                            keep_ratio: False
+                            allow_stretch: True
+                        FitImage:
+                            source: app.asset_path + "/physics6.jpg"
+                            keep_ratio: False
+                            allow_stretch: True
 
-        MDScrollView:
-            height: "100dp"
-            do_scroll_x: True
-            do_scroll_y: True
+                # Primeira seção - Matérias Principais
+                MDGridLayout:
+                    cols: 3
+                    spacing: "12dp"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: ["2dp", "0dp", "5dp", "0dp"]
 
-            MDBoxLayout:
-                orientation: "horizontal"
-                spacing: "5dp"
-                padding: "10dp"
-                size_hint_x: None
-                width: self.minimum_width
+                    # Cards principais
+                    MDCard:
+                        size_hint: None, None
+                        height: "100dp"
+                        width: "100dp"
+                        radius: [20, 20, 20, 20]
+                        md_bg_color: 0.4627, 0.2196, 0.9804, 1
+                        ripple_behavior: True
+                        padding: "10dp"
+                        on_release: app.on_subject_selected("Inglês")
+                        
+                        MDBoxLayout:
+                            orientation: "vertical"
+                            spacing: "8dp"
+                            size_hint: 1, 1
+                            MDIcon:
+                                icon: "translate"
+                                size_hint: None, None
+                                size: "40dp", "40dp"
+                                pos_hint: {"center_x": 0.5}
+                                theme_text_color: "Custom"
+                                text_color: 1, 1, 1, 1
+                            MDLabel:
+                                text: "Inglês"
+                                halign: "center"
+                                font_style: "Button"
+                                bold: True
+                    MDCard:
+                        size_hint: None, None
+                        height: "100dp"
+                        width: "100dp"
+                        radius: [20, 20, 20, 20]
+                        md_bg_color: 0.4627, 0.2196, 0.9804, 1
+                        ripple_behavior: True
+                        padding: "10dp"
+                        on_release: app.on_subject_selected("Inglês")
+                        
+                        MDBoxLayout:
+                            orientation: "vertical"
+                            spacing: "8dp"
+                            size_hint: 1, 1
+                            MDIcon:
+                                icon: "function-variant"
+                                size_hint: None, None
+                                size: "40dp", "40dp"
+                                pos_hint: {"center_x": 0.5}
+                                theme_text_color: "Custom"
+                                text_color: 1, 1, 1, 1
+                            MDLabel:
+                                text: "Fisica"
+                                halign: "center"
+                                font_style: "Button"
+                                bold: True
+                    MDCard:
+                        size_hint: None, None
+                        height: "100dp"
+                        width: "100dp"
+                        radius: [20, 20, 20, 20]
+                        md_bg_color: 0.4627, 0.2196, 0.9804, 1
+                        ripple_behavior: True
+                        padding: "10dp"
+                        on_release: app.on_subject_selected("Inglês")
+                        
+                        MDBoxLayout:
+                            orientation: "vertical"
+                            spacing: "8dp"
+                            size_hint: 1, 1
+                            MDIcon:
+                                icon: "book-open-variant"
+                                size_hint: None, None
+                                size: "40dp", "40dp"
+                                pos_hint: {"center_x": 0.5}
+                                theme_text_color: "Custom"
+                                text_color: 1, 1, 1, 1
+                            MDLabel:
+                                text: "Historia"
+                                halign: "center"
+                                font_style: "Button"
+                                bold: True
+                    MDCard:
+                        size_hint: None, None
+                        height: "100dp"
+                        width: "100dp"
+                        radius: [20, 20, 20, 20]
+                        md_bg_color: 0.4627, 0.2196, 0.9804, 1
+                        ripple_behavior: True
+                        padding: "10dp"
+                        on_release: app.on_subject_selected("Inglês")
+                        
+                        MDBoxLayout:
+                            orientation: "vertical"
+                            spacing: "8dp"
+                            size_hint: 1, 1
+                            MDIcon:
+                                icon: "brain"
+                                size_hint: None, None
+                                size: "40dp", "40dp"
+                                pos_hint: {"center_x": 0.5}
+                                theme_text_color: "Custom"
+                                text_color: 1, 1, 1, 1
+                            MDLabel:
+                                text: "Memoria"
+                                halign: "center"
+                                font_style: "Button"
+                                bold: True
+                    MDCard:
+                        size_hint: None, None
+                        height: "100dp"
+                        width: "100dp"
+                        radius: [20, 20, 20, 20]
+                        md_bg_color: 0.4627, 0.2196, 0.9804, 1
+                        ripple_behavior: True
+                        padding: "10dp"
+                        on_release: app.on_subject_selected("Inglês")
+                        
+                        MDBoxLayout:
+                            orientation: "vertical"
+                            spacing: "8dp"
+                            size_hint: 1, 1
+                            MDIcon:
+                                icon: "leaf"
+                                size_hint: None, None
+                                size: "40dp", "40dp"
+                                pos_hint: {"center_x": 0.5}
+                                theme_text_color: "Custom"
+                                text_color: 1, 1, 1, 1
+                            MDLabel:
+                                text: "Biologia"
+                                halign: "center"
+                                font_style: "Button"
+                                bold: True
+                    MDCard:
+                        size_hint: None, None
+                        height: "100dp"
+                        width: "100dp"
+                        radius: [20, 20, 20, 20]
+                        md_bg_color: 0.4627, 0.2196, 0.9804, 1
+                        ripple_behavior: True
+                        padding: "10dp"
+                        on_release: app.on_subject_selected("Inglês")
+                        
+                        MDBoxLayout:
+                            orientation: "vertical"
+                            spacing: "8dp"
+                            size_hint: 1, 1
+                            MDIcon:
+                                icon: "calculator"
+                                size_hint: None, None
+                                size: "40dp", "40dp"
+                                pos_hint: {"center_x": 0.5}
+                                theme_text_color: "Custom"
+                                text_color: 1, 1, 1, 1
+                            MDLabel:
+                                text: "Matemática"
+                                halign: "center"
+                                font_style: "Button"
+                                bold: True
+                    
 
-                MDCard:
-                    size_hint: None, None
-                    height: "75dp"
-                    width: "75dp"
-                    radius: 10
-                    md_bg_color: 0.9, 0.9, 0.9, 1
-                    on_release: root.screen_root('quiz')
-                    Label:
-                        color: 0, 0, 0, 1
-                        text: "Historia"
-                MDCard:
-                    size_hint: None, None
-                    height: "75dp"
-                    width: "75dp"
-                    radius: 10
-                    md_bg_color: 0.9, 0.9, 0.9, 1
-                    Label:
-                        color: 0, 0, 0, 1
-                        text: "Ingles"
-                MDCard:
-                    size_hint: None, None
-                    height: "75dp"
-                    width: "75dp"
-                    radius: 10
-                    md_bg_color: 0.9, 0.9, 0.9, 1
-                    Label:
-                        color: 0, 0, 0, 1
-                        text: "Math"
-                MDCard:
-                    size_hint: None, None
-                    height: "75dp"
-                    width: "75dp"
-                    radius: 10
-                    md_bg_color: 0.9, 0.9, 0.9, 1
-                    Label:
-                        color: 0, 0, 0, 1
-                        text: "Fisica"
-                MDCard:
-                    size_hint: None, None
-                    height: "75dp"
-                    width: "75dp"
-                    radius: 10
-                    md_bg_color: 0.9, 0.9, 0.9, 1
-                    Label:
-                        color: 0, 0, 0, 1
-                        text: "Geografia"
+
+                # Segunda seção - Outras Matérias (Scroll Horizontal, centralizado)
+                MDBoxLayout:
+                    orientation: "vertical"
+                    size_hint: 1, None
+                    height: self.minimum_height
+                    spacing: "2dp"
+                    MDLabel:
+                        text: "Seus Módulos"
+                        font_style: "H6"
+                        bold: True
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        halign: "left"
+
+                    ScrollView:
+                        size_hint: 1, None
+                        height: "140dp"
+                        do_scroll_x: True
+                        do_scroll_y: False
+                        bar_width: "6dp"
+                        bar_color: 0.4627, 0.2196, 0.9804, 0.8
+                        bar_inactive_color: 0.4627, 0.2196, 0.9804, 0.3
+                        
+                        MDBoxLayout:
+                            id: modulos_home_card
+                            orientation: "horizontal"
+                            spacing: "15dp"
+                            size_hint_x: None
+                            width: self.minimum_width
+                            height: "130dp"
+                            padding: ["10dp", "0dp", "10dp", "0dp"]
+                            pos_hint: {"center_x": 0.5}  # centraliza horizontalmente
+
+                            MDCard:
+                                size_hint: None, None
+                                height: "90dp"
+                                width: "90dp"
+                                radius: [20, 20, 20, 20]
+                                md_bg_color: 0.4627, 0.2196, 0.9804, 1
+                                ripple_behavior: True
+                                padding: "10dp"
+                                on_release: root.screen_root('quiz')
+                                
+                                MDBoxLayout:
+                                    orientation: "vertical"
+                                    spacing: "8dp"
+                                    size_hint: 1, 1
+                                    MDIcon:
+                                        icon: "book-open-variant"
+                                        size_hint: None, None
+                                        size: "40dp", "40dp"
+                                        pos_hint: {"center_x": 0.5}
+                                        theme_text_color: "Custom"
+                                        text_color: 1, 1, 1, 1
+                                    MDLabel:
+                                        text: "História"
+                                        halign: "center"
+                                        font_style: "Button"
+                                        bold: True
+
         MDBottomAppBar:
-            
             MDTopAppBar:
                 title: "Academia"
                 icon: "plus"
                 type: "bottom"
                 on_action_button: root.on_plus()
-                shadow_color: 0, 0, 0, 1
                 elevation: 0
                 mode: "end"
                 left_action_items: [["menu", lambda x: root.on_plus()]]
-
+                size_hint_y: None
+                height: "56dp"
+                md_bg_color: 0.4627, 0.2196, 0.9804, 1
 # ---------------------quiz screen------------------------
 <QuizScreen>:
     name: "quiz"
@@ -177,34 +372,72 @@ ScreenManager:
     name: "form"
     MDScreen:
 
-        MDTextField:
-            id: question
-            hint_text: "Create a question"
-            pos_hint: {"center_x": 0.5, "center_y":0.7}
-            size_hint_x: 0.7
-            size_hint_y: 0.2
-            mode: "rectangle"
-
         MDBoxLayout:
-            id: form_screen
             orientation: "vertical"
-            spacing: "50dp"
-            padding: "10dp"
+            padding: "20dp"
+            spacing: "20dp"
 
-        MDBoxLayout:
-            orientation: "horizontal"
-            spacing: "5dp"
-            padding: "10dp"
-            size_hint: None, None
-            height: "100dp"
-                
-            
-            MDRaisedButton:
-                text: "Criar jogo"
-                pos_hint: {"center_x": 0.5, "center_y":0.1}
-                on_release: root.create_game()
-            
-            MDRaisedButton:
-                text: "Adicionar resposta"
-                pos_hint: {"center_x": 0.5, "center_y":0.1}
-                on_release: root.create_question(2)
+            # Barra de topo
+            MDTopAppBar:
+                title: "Criar Quiz"
+                md_bg_color: 0.4627, 0.2196, 0.9804, 1  # #7638FA
+                left_action_items: [["arrow-left", lambda x: root.go_home()]]
+                right_action_items: [["bell", lambda x: root.on_notification()],["information", lambda x: app.on_info(x)]]
+                size_hint_y: None
+                height: "56dp"
+                elevation: 0  # sem sombra
+
+            # Campo para a pergunta
+            MDTextField:
+                id: question
+                hint_text: "Cria uma pergunta"
+                size_hint_x: 0.95
+                pos_hint: {"center_x": 0.5}
+                mode: "rectangle"
+                line_color_focus: 0.4627, 0.2196, 0.9804, 1
+                text_color: 0, 0, 0, 1
+                helper_text: "Ex.: Qual é a capital de Portugal?"
+                helper_text_mode: "on_focus"
+
+            # Área das respostas
+            ScrollView:
+                size_hint_y: 0.5
+                MDBoxLayout:
+                    id: form_screen
+                    orientation: "vertical"
+                    spacing: "15dp"
+                    padding: "10dp"
+                    size_hint_y: None
+                    height: self.minimum_height
+
+            # Botões de ação
+            MDBoxLayout:
+                orientation: "horizontal"
+                spacing: "20dp"
+                size_hint_y: None
+                height: "50dp"
+                padding: "5dp"
+
+                MDRaisedButton:
+                    text: "Criar jogo"
+                    md_bg_color: 0.4627, 0.2196, 0.9804, 1
+                    text_color: 1, 1, 1, 1
+                    elevation: 0  # sem sombra
+                    on_release: root.submit_quiz()
+
+                MDRaisedButton:
+                    text: "Adicionar resposta"
+                    md_bg_color: 0.4627, 0.2196, 0.9804, 1
+                    text_color: 1, 1, 1, 1
+                    elevation: 0  # sem sombra
+                    on_release: root.create_quiz(1)
+
+            # Campo para resposta correta
+            MDTextField:
+                id: correct
+                hint_text: "Indique o número da resposta correta"
+                size_hint_x: 0.95
+                pos_hint: {"center_x": 0.5}
+                mode: "rectangle"
+                line_color_focus: 0.4627, 0.2196, 0.9804, 1
+                text_color: 0, 0, 0, 1
