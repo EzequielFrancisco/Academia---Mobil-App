@@ -22,5 +22,5 @@ Academia is based on the idea of **learning through repetition and play**, helpi
 This project was created for **educational and learning purposes**.
 
 ## Screenshot
-![App Screenshot](mobil/academia/assets/screen1.png)
-![App Screenshot](mobil/academia/assets/screen2.png)
+![App Screenshot](mobil/academia/assets/sceen1.png)
+![App Screenshot](mobil/academia/assets/sceen2.png)
