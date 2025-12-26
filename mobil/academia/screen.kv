@@ -1,8 +1,10 @@
 ScreenManager:
     SplashScreen:
+    InfoSplashScreen:
     HomeScreen:
     QuizScreen:
     FormScreen:
+    MemoryScreen:
 
 
 <SplashScreen>:
@@ -29,6 +31,27 @@ ScreenManager:
             text: "Por favor aguarde"
             halign: "center"
 
+# --------------------info screen------------------------
+
+<InfoSplashScreen>:
+    name: "info_splash"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "40dp"
+        spacing: "20dp"
+
+        MDLabel:
+            id: info_label
+            text: ""
+
+        MDProgressBar:
+            id: progress_bar
+            value: 90
+            max: 100
+            size_hint_y: None
+            height: "6dp"
+
 
 # ---------------------home screen------------------------
 <HomeScreen>:
@@ -42,7 +65,7 @@ ScreenManager:
             title: ""
             md_bg_color: 0.4627, 0.2196, 0.9804, 1  # #7638FA
             left_action_items: [["account", lambda x: app.on_profile(x)]]
-            right_action_items: [["bell", lambda x: app.on_notification(x)], ["information", lambda x: app.on_info(x)]]
+            right_action_items: [["bell", lambda x: app.on_notification(x)], ["information", None, "Informação rápida sobre este módulo"]]
             size_hint_y: None
             height: "56dp"
             elevation: 0
@@ -161,7 +184,7 @@ ScreenManager:
                         md_bg_color: 0.4627, 0.2196, 0.9804, 1
                         ripple_behavior: True
                         padding: "10dp"
-                        on_release: app.on_subject_selected("Inglês")
+                        on_release: root.screen_root("historia")
                         
                         MDBoxLayout:
                             orientation: "vertical"
@@ -187,7 +210,7 @@ ScreenManager:
                         md_bg_color: 0.4627, 0.2196, 0.9804, 1
                         ripple_behavior: True
                         padding: "10dp"
-                        on_release: app.on_subject_selected("Inglês")
+                        on_release: root.screen_root("memoria")
                         
                         MDBoxLayout:
                             orientation: "vertical"
@@ -213,7 +236,7 @@ ScreenManager:
                         md_bg_color: 0.4627, 0.2196, 0.9804, 1
                         ripple_behavior: True
                         padding: "10dp"
-                        on_release: app.on_subject_selected("Inglês")
+                        on_release: app.on_subject_selected("biologia")
                         
                         MDBoxLayout:
                             orientation: "vertical"
@@ -239,7 +262,7 @@ ScreenManager:
                         md_bg_color: 0.4627, 0.2196, 0.9804, 1
                         ripple_behavior: True
                         padding: "10dp"
-                        on_release: app.on_subject_selected("Inglês")
+                        on_release: app.on_subject_selected("matematica")
                         
                         MDBoxLayout:
                             orientation: "vertical"
@@ -293,6 +316,7 @@ ScreenManager:
                             padding: ["10dp", "0dp", "10dp", "0dp"]
                             pos_hint: {"center_x": 0.5}  # centraliza horizontalmente
 
+                            
                             MDCard:
                                 size_hint: None, None
                                 height: "90dp"
@@ -300,25 +324,23 @@ ScreenManager:
                                 radius: [20, 20, 20, 20]
                                 md_bg_color: 0.4627, 0.2196, 0.9804, 1
                                 ripple_behavior: True
-                                padding: "10dp"
-                                on_release: root.screen_root('quiz')
-                                
+                                on_release: root.create_modules()
+
                                 MDBoxLayout:
                                     orientation: "vertical"
-                                    spacing: "8dp"
+                                    padding: "5dp"
+                                    spacing: "0dp"
                                     size_hint: 1, 1
                                     MDIcon:
-                                        icon: "book-open-variant"
-                                        size_hint: None, None
-                                        size: "40dp", "40dp"
-                                        pos_hint: {"center_x": 0.5}
+                                        icon: "plus"
+                                        font_size: "60dp"  # define tamanho do ícone
+                                        halign: "center"
+                                        valign: "middle"
+                                        pos_hint: {"center_x": 0.5, "center_y": 0.1}
                                         theme_text_color: "Custom"
                                         text_color: 1, 1, 1, 1
-                                    MDLabel:
-                                        text: "História"
-                                        halign: "center"
-                                        font_style: "Button"
-                                        bold: True
+
+
 
         MDBottomAppBar:
             MDTopAppBar:
@@ -340,6 +362,14 @@ ScreenManager:
         orientation: "vertical"
         padding: "20dp"
         spacing: "20dp"
+        MDTopAppBar:
+            title: "Historia"
+            md_bg_color: 0.4627, 0.2196, 0.9804, 1  # #7638FA
+            left_action_items: [["arrow-left", lambda x: root.go_home()]]
+            right_action_items: [["bell", lambda x: root.on_notification()],["information", None, "Informação rápida sobre este módulo"]]
+            size_hint_y: None
+            height: "56dp"
+            elevation: 0 
 
         # Área da pergunta (altura fixa)
         MDBoxLayout:
@@ -349,12 +379,18 @@ ScreenManager:
             radius: [20, 20, 20, 20]
 
             Label:
+                id: label_quiz_question
                 color: 1, 1, 1, 1
                 font_size: "14sp"
-                text: "Qual a Capital de Angola?"
+                text: ""
+                text_size: self.width, None  # define largura fixa para quebra de linha
+                size_hint_y: None  # ajusta altura ao conteúdo
+                halign: "center"                # alinhamento horizontal
+                valign: "top"  
 
             MDFillRoundFlatButton:
-                text: "Div principal"
+                icon: "heart"
+                text: "vidas 3"
 
         # Área das opções (cresce com o conteúdo)
         ScrollView:
@@ -367,6 +403,66 @@ ScreenManager:
                 size_hint_y: None
                 adaptive_height: True
 
+
+# ---------------------memory screen------------------------
+<MemoryScreen>:
+    name: "memory"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "20dp"
+        spacing: "20dp"
+
+        MDTopAppBar:
+            title: "Melhorar Memória"
+            md_bg_color: 0.4627, 0.2196, 0.9804, 1  # #7638FA
+            left_action_items: [["arrow-left", lambda x: root.go_home()]]
+            right_action_items: [["bell", lambda x: root.on_notification()],["information", None, "Informação rápida sobre este módulo"]]
+            size_hint_y: None
+            height: "56dp"
+            elevation: 0  # sem sombra
+
+
+        # Área da pergunta (altura fixa)
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(120)
+            md_bg_color: 0.2, 0.5, 0.9, 1
+            radius: [20, 20, 20, 20]
+
+            MDLabel:
+                halign: "left"
+                text_size: self.width, None
+                color: 1, 1, 1, 1
+                spacing: "4dp"
+                halign: "center"
+                font_size: "14sp"
+                text: "Diga os proximos numeros da sequencia de Euler! e=2.?"
+
+            MDFillRoundFlatButton:
+                text: "e = 2.71828"
+
+        ScrollView:
+            size_hint_y: 1   
+            MDGridLayout:
+                id: containers_memory_card
+                cols: 4
+                spacing: dp(10)
+                padding: dp(10)
+                size_hint_y: None
+                adaptive_height: True
+
+                # Cards will be added dynamically here
+            
+        MDLabel:
+            id: memory_label
+            text: ""
+            height: self.texture_size[1]
+            size_hint_y: None
+            halign: "center"
+            font_style: "H6"
+            bold: True
+            
 # ---------------------form screen------------------------
 <FormScreen>:
     name: "form"
@@ -380,9 +476,9 @@ ScreenManager:
             # Barra de topo
             MDTopAppBar:
                 title: "Criar Quiz"
-                md_bg_color: 0.4627, 0.2196, 0.9804, 1  # #7638FA
+                md_bg_color: 0.4627, 0.2196, 0.9804, 1 # #dd38faff
                 left_action_items: [["arrow-left", lambda x: root.go_home()]]
-                right_action_items: [["bell", lambda x: root.on_notification()],["information", lambda x: app.on_info(x)]]
+                right_action_items: [["bell", lambda x: root.on_info()],["information", None, "Para criar um quiz,\n preencha os campos abaixo, e selecione o modulo disponivel."]]
                 size_hint_y: None
                 height: "56dp"
                 elevation: 0  # sem sombra
@@ -426,11 +522,21 @@ ScreenManager:
                     on_release: root.submit_quiz()
 
                 MDRaisedButton:
-                    text: "Adicionar resposta"
+                    text: "questao"
+                    icon: "plus"
                     md_bg_color: 0.4627, 0.2196, 0.9804, 1
                     text_color: 1, 1, 1, 1
                     elevation: 0  # sem sombra
                     on_release: root.create_quiz(1)
+
+                MDRaisedButton:
+                    id: btn_opcao
+                    text: "Modulos"
+                    md_bg_color: 0.4627, 0.2196, 0.9804, 1
+                    text_color: 1, 1, 1, 1
+                    elevation: 0  # sem sombra
+                    on_release: root.menu_modulos()
+
 
             # Campo para resposta correta
             MDTextField:
